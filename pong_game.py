@@ -14,11 +14,13 @@ rect2 = Rectangle("", screen)
 circle = Circle(screen, rect1, rect2)
 game_active = True
 game_start = False
+start_time = 0
 
 
 # count score
 def get_score():
-    current_time = pygame.time.get_ticks()
+
+    current_time = pygame.time.get_ticks() - start_time
     score = int(current_time / 1000)
     score_text = text_font.render(f"Score: {score}", True, "White")
     score_text_rect = score_text.get_rect(center=(250, 20))
@@ -40,6 +42,7 @@ while True:
                 circle.x = screen.get_width() / 2
                 circle.y = screen.get_height() / 2
                 game_start = True
+                start_time = pygame.time.get_ticks()
 
     if game_start:
         if game_active:
